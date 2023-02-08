@@ -3,6 +3,7 @@ package com.company;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 public class Dbfunctions {
     public Connection connect_to_db(String dbname,String user,String pass){
@@ -35,13 +36,28 @@ public class Dbfunctions {
         }
     }
 
-    public void insert_row(Connection conn,String table_name,String name, String address, Integer cash){
+    public void register(Connection conn,String table_name,String name, String address, Integer cash){
         Statement statement;
         try {
             String query=String.format("insert into %s(name,address, cash) values('%s','%s', '%s');",table_name,name,address,cash);
             statement=conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Registered");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void login(Connection conn,String table_name,String name, String address){
+        try {
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and address='%s'", table_name, name, address);
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                System.out.println("Yeah, you have an account");
+            } else {
+                System.out.println("You did not register");
+            }
         }catch (Exception e){
             System.out.println(e);
         }
