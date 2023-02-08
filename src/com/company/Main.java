@@ -40,7 +40,7 @@ public class Main {
     }
     private static void login(){
         Connection conn = db.connect_to_db("Tour", "postgres", "123");
-        System.out.print("Register FORM:\n");
+        System.out.print("REGISTER FORM:\n");
         System.out.print("Your Name:");
         String name = scan.nextLine();
         System.out.print("Your Surname:");
