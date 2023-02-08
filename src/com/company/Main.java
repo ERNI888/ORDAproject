@@ -8,6 +8,6 @@ public class Main {
         Dbfunctions db=new Dbfunctions();
         Connection conn=db.connect_to_db("ordadb","postgres","12345678");
         db.createTable(conn,"");
-        System.out.println('1');
+        System.out.println('5');
     }
 }
