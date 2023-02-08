@@ -26,7 +26,7 @@ public class Dbfunctions {
     public void createTable(Connection conn, String table_name){
         Statement statement;
         try{
-            String query="create table "+table_name+"(empid SERIAL,name varchar(200),address varchar(200),primary key(empid));";
+            String query="create table "+table_name+"(empid SERIAL,name varchar(200),address varchar(200), cash integer(20), primary key(empid));";
             statement=conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Table Created");
@@ -35,10 +35,10 @@ public class Dbfunctions {
         }
     }
 
-    public void insert_row(Connection conn,String table_name,String name, String address){
+    public void insert_row(Connection conn,String table_name,String name, String address, Integer cash){
         Statement statement;
         try {
-            String query=String.format("insert into %s(name,address) values('%s','%s');",table_name,name,address);
+            String query=String.format("insert into %s(name,address, cash) values('%s','%s', '%s');",table_name,name,address,cash);
             statement=conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Registered");
