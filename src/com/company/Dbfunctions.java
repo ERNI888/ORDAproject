@@ -11,12 +11,12 @@ public class Dbfunctions {
         try{
             Class.forName("org.postgresql.Driver");
             conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,pass);
-            if(conn!=null){
-                System.out.println("Connection Established");
-            }
-            else{
-                System.out.println("Connection Failed");
-            }
+//            if(conn!=null){
+//                System.out.println("Connection Established");
+//            }
+//            else{
+//                System.out.println("Connection Failed");
+            //}
 
         }catch (Exception e){
             System.out.println(e);
@@ -48,9 +48,9 @@ public class Dbfunctions {
         }
     }
 
-    public void login(Connection conn,String table_name,String name, String address){
+    public void login(Connection conn,String table_name,String name, String surname){
         try {
-            String query = String.format("SELECT * FROM %s WHERE name='%s' and address='%s'", table_name, name, address);
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and address='%s'", table_name, name, surname);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
@@ -62,4 +62,5 @@ public class Dbfunctions {
             System.out.println(e);
         }
     }
+
 }
