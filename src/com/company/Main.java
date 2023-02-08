@@ -16,10 +16,11 @@ public class Main {
         System.out.println("2) No, create account");
 
         int number = scan.nextInt();
+        scan.nextLine();
         if(number==1){
             System.out.print("Your Name:");
             String name = scan.nextLine();
-            System.out.println("\nYour Address:");
+            System.out.println("Your Address:");
             String address = scan.nextLine();
             db.insert_row(conn,"kokokoko",name,address);
         }
