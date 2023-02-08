@@ -27,7 +27,7 @@ public class Main {
             db.insert_row(conn,"per",name,address,cash);
         }
         else{
-            System.out.println("OK");
+            System.out.println("Problem with register");
         }
     }
 }
