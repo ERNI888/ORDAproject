@@ -37,7 +37,7 @@ public class Main {
             db.login(conn,"per",name,address);
         }
         else{
-            System.out.println("Problem with login/registration");
+            System.out.println("Problem with login/registration!");
         }
     }
 }
