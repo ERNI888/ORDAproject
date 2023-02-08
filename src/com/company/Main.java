@@ -17,17 +17,27 @@ public class Main {
 
         int number = scan.nextInt();
         scan.nextLine();
-        if(number==1){
+        if(number==2){
+            System.out.print("REGISTRATION FORM:");
             System.out.print("Your Name:");
             String name = scan.nextLine();
             System.out.print("Your Surname:");
             String address = scan.nextLine();
             System.out.print("How much money do you have?:");
             int cash = scan.nextInt();
-            db.insert_row(conn,"per",name,address,cash);
+            db.register(conn,"per",name,address,cash);
+
+        }
+        else if (number==1){
+            System.out.print("LOGIN FORM:");
+            System.out.print("Your Name:");
+            String name = scan.nextLine();
+            System.out.print("Your Surname:");
+            String address = scan.nextLine();
+            db.login(conn,"per",name,address);
         }
         else{
-            System.out.println("Problem with register");
+            System.out.println("Problem with login/registration");
         }
     }
 }
