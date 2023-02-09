@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Scanner;
 public class Main extends RegisterAndLogin {
     static Scanner scan = new Scanner(System.in);
-    RegisterAndLogin reglog = new RegisterAndLogin();
+    RegisterAndLogin rg = new RegisterAndLogin();
     static Dbfunctions db = new Dbfunctions();
     static SearchByCountry sbc = new SearchByCountry();
     Connection conn = db.connect_to_db("postgres", "postgres", "pinokio");

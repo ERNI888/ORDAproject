@@ -28,7 +28,7 @@ public class Dbfunctions {
     public void createTable(Connection conn, String table_name){
         Statement statement;
         try{
-            String query="create table "+table_name+"(empid SERIAL,name varchar(200),surename varchar(200), cash integer(20), primary key(empid));";
+            String query="create table "+table_name+"(empid SERIAL primary key ,name varchar(200),surename varchar(200), cash integer(20));";
             statement=conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Table Created");
