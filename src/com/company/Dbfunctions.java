@@ -24,43 +24,61 @@ public class Dbfunctions {
         return conn;
     }
 
-    public void createTable(Connection conn, String table_name){
+//    public void createTable(Connection conn, String table_name){
+//        Statement statement;
+//        try{
+//            String query="create table "+table_name+"(empid SERIAL,name varchar(200),surename varchar(200), cash integer(20), primary key(empid));";
+//            statement=conn.createStatement();
+//            statement.executeUpdate(query);
+//            System.out.println("Table Created");
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
+//    }
+
+    public void register(Connection conn,String table_name,String name, String surename, Integer password, Integer cash){
         Statement statement;
-        try{
-            String query="create table "+table_name+"(empid SERIAL,name varchar(200),address varchar(200), cash integer(20), primary key(empid));";
+        try {
+            String query=String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');",table_name,name,surename,password, cash);
             statement=conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Table Created");
+            System.out.println("Registered\n");
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public void register(Connection conn,String table_name,String name, String address, Integer cash){
-        Statement statement;
+    public void login(Connection conn,String table_name,String name, String surname, Integer password){
         try {
-            String query=String.format("insert into %s(name,address, cash) values('%s','%s', '%s');",table_name,name,address,cash);
-            statement=conn.createStatement();
-            statement.executeUpdate(query);
-            System.out.println("Registered");
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
-    public void login(Connection conn,String table_name,String name, String surname){
-        try {
-            String query = String.format("SELECT * FROM %s WHERE name='%s' and address='%s'", table_name, name, surname);
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
-                System.out.println("Yeah, you have an account");
+                System.out.println("Yeah, you have an account\n");
             } else {
-                System.out.println("You did not register");
+                System.out.println("You did not register\n");
             }
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
+    public void search_by_country(Connection conn, String table_name,String arrival){
+        Statement statement;
+        ResultSet rs;
+        try {
+            String query=String.format("select * from %s where arrival= '%s'",table_name,arrival);
+            statement=conn.createStatement();
+            rs=statement.executeQuery(query);
+            while (rs.next()){
+                System.out.println("ID: " + rs.getString("id") +
+                        " | Arrival: " + rs.getString("arrival") +
+                        " | Price: " + rs.getString("price") +
+                        " | Date: " + rs.getString("date") +
+                        " | Hotel Name: " + rs.getString("hotel_name"));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 }
