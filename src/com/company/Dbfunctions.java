@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class Dbfunctions {
+
     public Connection connect_to_db(String dbname,String user,String pass){
         Connection conn=null;
         try{
@@ -24,19 +25,19 @@ public class Dbfunctions {
         return conn;
     }
 
-//    public void createTable(Connection conn, String table_name){
-//        Statement statement;
-//        try{
-//            String query="create table "+table_name+"(empid SERIAL,name varchar(200),surename varchar(200), cash integer(20), primary key(empid));";
-//            statement=conn.createStatement();
-//            statement.executeUpdate(query);
-//            System.out.println("Table Created");
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-//    }
+    public void createTable(Connection conn, String table_name){
+        Statement statement;
+        try{
+            String query="create table "+table_name+"(empid SERIAL,name varchar(200),surename varchar(200), cash integer(20), primary key(empid));";
+            statement=conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Table Created");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
-    public void register(Connection conn,String table_name,String name, String surename, Integer password, Integer cash){
+    public static void register(Connection conn, String table_name, String name, String surename, Integer password, Integer cash){
         Statement statement;
         try {
             String query=String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');",table_name,name,surename,password, cash);
@@ -48,20 +49,20 @@ public class Dbfunctions {
         }
     }
 
-    public void login(Connection conn,String table_name,String name, String surname, Integer password){
+    public static boolean login(Connection conn, String table_name, String name, String surname, Integer password){
         try {
             String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
-                System.out.println("Yeah, you have an account\n");
-            } else {
-                System.out.println("You did not register\n");
+              //  System.out.println("Yeah, you have an account\n");
+                return true;
             }
         }catch (Exception e){
             System.out.println(e);
         }
-    }
+     return false;
+    } // public String not = "You did not register";
 
     public void search_by_country(Connection conn, String table_name,String arrival){
         Statement statement;
@@ -73,7 +74,7 @@ public class Dbfunctions {
             while (rs.next()){
                 System.out.println("ID: " + rs.getString("id") +
                         " | Arrival: " + rs.getString("arrival") +
-                        " | Price: " + rs.getString("price") +
+                        " | Price: " + rs.getDouble("price") +
                         " | Date: " + rs.getString("date") +
                         " | Hotel Name: " + rs.getString("hotel_name"));
             }
