@@ -1,8 +1,6 @@
 package com.company;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Scanner;
 
 public class SearchByCountry{
@@ -23,21 +21,11 @@ public class SearchByCountry{
         int number = scan.nextInt();
         scan.nextLine();
         switch (number) {
-            case 1:
-                db.search_by_country(conn, "tur", "Dubai");
-                break;
-            case 2:
-                db.search_by_country(conn, "tur", "Turkey");
-                break;
-            case 3:
-                db.search_by_country(conn, "tur", "Japan");
-                break;
-            case 4:
-                db.search_by_country(conn, "tur", "UK");
-                break;
-            case 5:
-                db.search_by_country(conn, "tur", "Kazakhstan");
-                break;
+            case 1 -> db.search_by_country(conn, "tur", "Dubai");
+            case 2 -> db.search_by_country(conn, "tur", "Turkey");
+            case 3 -> db.search_by_country(conn, "tur", "Japan");
+            case 4 -> db.search_by_country(conn, "tur", "UK");
+            case 5 -> db.search_by_country(conn, "tur", "Kazakhstan");
         }
 
         }

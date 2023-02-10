@@ -29,7 +29,11 @@ public class Main extends RegisterAndLogin {
                 register();
 
                 if(checkLogin()) {
+                    System.out.println("yes you have account, there is list of countries");
                     SearchByCountry.searchByCountry();
+                }
+                else {
+                    System.out.println("you dont have account");
                 }
                 break;
             default:

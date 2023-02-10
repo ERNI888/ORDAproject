@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
 public class Dbfunctions {
-
+    User person = new User();
     public Connection connect_to_db(String dbname,String user,String pass){
         Connection conn=null;
         try{
@@ -37,10 +36,10 @@ public class Dbfunctions {
         }
     }
 
-    public static void register(Connection conn, String table_name, String name, String surename, Integer password, Integer cash){
+    public static void register(Connection conn, String table_name, String name, String surname, Integer password, Integer cash){
         Statement statement;
         try {
-            String query=String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');",table_name,name,surename,password, cash);
+            String query=String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');",table_name,name, surname,password, cash);
             statement=conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Registered\n");

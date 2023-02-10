@@ -1,17 +1,15 @@
 package com.company;
 
 public class User {
-    private String name;
-    private String surname;
-    private int age;
-    private String gender;
-
-    public User(String name, String surname, int age, String gender) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.gender = gender;
-    }
+    public static String name;
+    public static String surname;
+    public static int cash;
+//
+//    public User() {
+//        this.name = name;
+//        this.surname = surname;
+//        this.cash = cash;
+//    }
 
     public String getName() {
         return name;
@@ -29,19 +27,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getAge() {
-        return age;
+    public int getCash() {
+        return cash;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setCash(int cash) {
+        this.cash = cash;
     }
 }

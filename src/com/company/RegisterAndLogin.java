@@ -13,12 +13,12 @@ public class RegisterAndLogin {
         System.out.print("Your Name:");
         String name = scan.nextLine();
         System.out.print("Your Surname:");
-        String surename = scan.nextLine();
+        String surname = scan.nextLine();
         System.out.print("Create password:");
         int password = scan.nextInt();
         System.out.print("How much money do you have?:");
         int cash = scan.nextInt();
-        Dbfunctions.register(conn,"person",name,surename,password,cash);
+        Dbfunctions.register(conn,"person",name,surname,password,cash);
     }
 
     public  static  boolean checkLogin(){
@@ -27,11 +27,11 @@ public class RegisterAndLogin {
         System.out.print("Your Name:");
         String name = scan.nextLine();
         System.out.print("Your Surname:");
-        String surename = scan.nextLine();
+        String surname = scan.nextLine();
         System.out.print("Enter your password:");
 
         int password = scan.nextInt();
         //Dbfunctions.login(conn,"person",name,surename,password);
-        return Dbfunctions.login(conn,"person",name,surename,password);
+        return Dbfunctions.login(conn,"person",name,surname,password);
     }
 }
