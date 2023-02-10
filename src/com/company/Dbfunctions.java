@@ -1,42 +1,45 @@
 package com.company;
 
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+public class Dbfunctions {
+    User person = new User();
 
-public class Dbfunctions extends User {
-
-    public static Connection connect_to_db(String dbName, String user, String password) {
+    public Connection connect_to_db(String dbname, String user, String pass) {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/" + dbName;
-            Properties props = new Properties();
-            props.setProperty("user", user);
-            props.setProperty("password", password);
-            conn = DriverManager.getConnection(url, props);
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, user, pass);
             if (conn != null) {
                 System.out.println("Connection Established");
             } else {
                 System.out.println("Connection Failed");
             }
-        } catch (ClassNotFoundException e) {
-            System.err.println("PostgreSQL driver not found.");
-        } catch (SQLException e) {
-            System.err.println("Failed to connect to database: " + e.getMessage());
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return conn;
     }
 
+    public void createTable(Connection conn, String table_name) {
+        Statement statement;
+        try {
+            String query = "create table " + table_name + "(empid SERIAL primary key ,name varchar(200),surename varchar(200), cash integer(20));";
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Table Created");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public static void register(Connection conn, String table_name, String name, String surname, Integer password, Integer cash) {
         Statement statement;
-        User user = new User();
-        user.setName(name);
-        user.setSurname(surname);
-        user.setPassword(password);
-        user.setCash(cash);
         try {
-            String query = String.format("insert into %s(name,surname,password, cash) values('%s','%s', '%s', '%s');", table_name, user.getName(), user.getSurname(), user.getPassword(), user.getCash());
+            String query = String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');", table_name, name, surname, password, cash);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Registered\n");
@@ -45,23 +48,20 @@ public class Dbfunctions extends User {
         }
     }
 
-    public static boolean login(Connection conn, String table_name, String name, String surname, int password) {
-        User user = new User();
-        user.setName(name);
-        user.setSurname(surname);
-        user.setPassword(password);
+    public static boolean login(Connection conn, String table_name, String name, String surname, Integer password) {
         try {
-            String query = String.format("SELECT * FROM %s WHERE name='%s' and surname='%s' and password='%s'", table_name, user.getName(), user.getSurname(), user.getPassword());
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
+                //  System.out.println("Yeah, you have an account\n");
                 return true;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return false;
-    }
+    } // public String not = "You did not register";
 
     public void search_by_country(Connection conn, String table_name, String arrival) {
         Statement statement;
@@ -74,7 +74,7 @@ public class Dbfunctions extends User {
                 System.out.println("ID: " + rs.getString("id") +
                         " | Arrival: " + rs.getString("arrival") +
                         " | Price: " + rs.getDouble("price") +
-                        " | Data: " + rs.getString("date") +
+                        " | Date: " + rs.getString("date") +
                         " | Hotel Name: " + rs.getString("hotel_name"));
             }
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class Dbfunctions extends User {
 
     public static int get_price_hotel(Connection conn, String table_name, Integer number_id_hotel) {
         Statement statement;
-        ResultSet res;
+        ResultSet res = null;
         try {
             String query = String.format("select * from %s where id= '%s'", table_name, number_id_hotel);
             statement = conn.createStatement();
@@ -98,41 +98,31 @@ public class Dbfunctions extends User {
         return 0;
     }
 
-    public static int getCashAmountForPerson(Connection conn, String tableName, String name, String surname, int password) {
+    public static int get_cash_person(Connection conn, String table_name, String name, String surname, Integer password) {
+        Statement statement;
+        ResultSet ress = null;
         try {
-            String query = "SELECT cash FROM " + tableName + " WHERE name = ? AND surname = ? AND password = ?";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, name);
-            statement.setString(2, surname);
-            statement.setInt(3, password);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getInt("cash");
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
+            statement = conn.createStatement();
+            ress = statement.executeQuery(query);
+            while (ress.next()) {
+                return ress.getInt("cash");
             }
-        } catch (SQLException e) {
-            System.err.println("Failed to retrieve cash amount: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return 0;
     }
 
-    public void updateCash(Connection conn, int newCash, int oldCash, String name, String surname, int password) {
+    public void update_cash(Connection conn,String table_name, Integer old_cash,Integer new_cash){
+        Statement statement;
         try {
-            String query = "UPDATE person SET cash = ? WHERE name = ? AND surname = ? AND password = ? AND cash = ?";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, newCash);
-            statement.setString(2, name);
-            statement.setString(3, surname);
-            statement.setInt(4, password);
-            statement.setInt(5, oldCash);
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected == 1) {
-                System.out.println("Data Updated");
-            } else {
-                System.out.println("No data was updated");
-            }
-        } catch (SQLException e) {
-            System.err.println("Failed to update cash amount: " + e.getMessage());
+            String query=String.format("update %s set cash='%s' where cash='%s'",table_name,old_cash,new_cash);
+            statement=conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Data Updated. Now you have: " + new_cash + " tg");
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
-
 }
