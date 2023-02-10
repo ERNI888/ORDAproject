@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.util.Scanner;
 public class Main extends RegisterAndLogin {
     static Scanner scan = new Scanner(System.in);
-    RegisterAndLogin rg = new RegisterAndLogin();
-    static Dbfunctions db = new Dbfunctions();
-    static SearchByCountry sbc = new SearchByCountry();
-    Connection conn = db.connect_to_db("postgres", "postgres", "pinokio");
+    RegisterAndLogin reglog = new RegisterAndLogin();
+    Dbfunctions db = new Dbfunctions();
+    SearchByCountry sbc = new SearchByCountry();
+    Connection conn = db.connect_to_db("postgres", "postgres", "shisuimykty1006");
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        RegisterAndLogin reglog = new RegisterAndLogin();
+        Dbfunctions db = new Dbfunctions();
+        SearchByCountry sbc = new SearchByCountry();
+        Connection conn = db.connect_to_db("postgres", "postgres", "shisuimykty1006");
 //        db.createTable(conn,"per");
         System.out.println("Hello it's OrdaTour!");
         System.out.println("Do you have account?");
@@ -21,7 +26,7 @@ public class Main extends RegisterAndLogin {
         scan.nextLine();
         switch (number){
             case 1:
-                 if(checkLogin()) {
+                if(checkLogin()) {
                     SearchByCountry.searchByCountry();
                 }
                 break;
@@ -39,6 +44,5 @@ public class Main extends RegisterAndLogin {
             default:
                 return;
         }
-     }
+    }
 }
-

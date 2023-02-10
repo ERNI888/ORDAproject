@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class RegisterAndLogin {
-     static Scanner scan = new Scanner(System.in);
-     static Dbfunctions db =new Dbfunctions();
-     static Connection conn=db.connect_to_db("postgres","postgres","pinokio");
+    static Scanner scan = new Scanner(System.in);
+    static Dbfunctions db =new Dbfunctions();
+    static Connection conn=db.connect_to_db("postgres","postgres","shisuimykty1006");
     public static void register(){
         scan.nextLine();
         System.out.print("\nREGISTRATION FORM:\n");
@@ -21,7 +21,7 @@ public class RegisterAndLogin {
         Dbfunctions.register(conn,"person",name,surname,password,cash);
     }
 
-    public  static  boolean checkLogin(){
+    public static boolean checkLogin(){
         scan.nextLine();
         System.out.print("\nLOGIN FORM:\n");
         System.out.print("Your Name:");
@@ -31,7 +31,7 @@ public class RegisterAndLogin {
         System.out.print("Enter your password:");
 
         int password = scan.nextInt();
-        //Dbfunctions.login(conn,"person",name,surename,password);
+        //Dbfunctions.login(conn,"person",name,surname,password);
         return Dbfunctions.login(conn,"person",name,surname,password);
     }
 }
