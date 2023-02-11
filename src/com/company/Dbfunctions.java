@@ -114,14 +114,14 @@ public class Dbfunctions {
         return 0;
     }
 
-    public void update_cash(Connection conn,String table_name, Integer old_cash,Integer new_cash){
+    public void update_cash(Connection conn, Integer new_cash, Integer old_cash, String name, String surname, Integer password) {
         Statement statement;
         try {
-            String query=String.format("update %s set cash='%s' where cash='%s'",table_name,old_cash,new_cash);
-            statement=conn.createStatement();
+            String query = String.format("UPDATE person SET cash='%s' where cash='%s' and name='%s' and surename='%s' and password='%s'", new_cash, old_cash, name, surname, password);
+            statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Updated");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
