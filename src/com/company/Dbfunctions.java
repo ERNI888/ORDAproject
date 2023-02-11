@@ -39,7 +39,7 @@ public class Dbfunctions {
     public static void register(Connection conn, String table_name, String name, String surname, Integer password, Integer cash) {
         Statement statement;
         try {
-            String query = String.format("insert into %s(name,surename,password, cash) values('%s','%s', '%s', '%s');", table_name, name, surname, password, cash);
+            String query = String.format("insert into %s(name,surname,password, cash) values('%s','%s', '%s', '%s');", table_name, name, surname, password, cash);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Registered\n");
@@ -50,7 +50,7 @@ public class Dbfunctions {
 
     public static boolean login(Connection conn, String table_name, String name, String surname, Integer password) {
         try {
-            String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and surname='%s' and password='%s'", table_name, name, surname, password);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
@@ -102,7 +102,7 @@ public class Dbfunctions {
         Statement statement;
         ResultSet ress = null;
         try {
-            String query = String.format("SELECT * FROM %s WHERE name='%s' and surename='%s' and password='%s'", table_name, name, surname, password);
+            String query = String.format("SELECT * FROM %s WHERE name='%s' and surname='%s' and password='%s'", table_name, name, surname, password);
             statement = conn.createStatement();
             ress = statement.executeQuery(query);
             while (ress.next()) {
@@ -117,7 +117,7 @@ public class Dbfunctions {
     public void update_cash(Connection conn, Integer new_cash, Integer old_cash, String name, String surname, Integer password) {
         Statement statement;
         try {
-            String query = String.format("UPDATE person SET cash='%s' where cash='%s' and name='%s' and surename='%s' and password='%s'", new_cash, old_cash, name, surname, password);
+            String query = String.format("UPDATE person SET cash='%s' where cash='%s' and name='%s' and surname='%s' and password='%s'", new_cash, old_cash, name, surname, password);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Updated");
