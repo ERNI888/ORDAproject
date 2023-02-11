@@ -7,14 +7,13 @@ public class RegisterAndLogin {
      static Scanner scan = new Scanner(System.in);
      static Dbfunctions db =new Dbfunctions();
      static SearchByCountry sbc = new SearchByCountry();
-     static Connection conn=db.connect_to_db("postgres","postgres","12345678");
+     static Connection conn=db.connect_to_db("postgres","postgres","shisuimykty1006");
     public static void register(){
-        scan.nextLine();
         System.out.print("\nREGISTRATION FORM:\n");
         System.out.print("Your Name:");
-        String name = scan.nextLine();
+        String name = scan.next();
         System.out.print("Your Surname:");
-        String surname = scan.nextLine();
+        String surname = scan.next();
         System.out.print("Create password:");
         int password = scan.nextInt();
         System.out.print("How much money do you have?:");
@@ -23,16 +22,15 @@ public class RegisterAndLogin {
     }
 
     public static boolean checkLogin(){
-        scan.nextLine();
         System.out.print("\nLOGIN FORM:\n");
         System.out.print("Your Name:");
-        String name = scan.nextLine();
+        String name = scan.next();
         System.out.print("Your Surname:");
-        String surname = scan.nextLine();
+        String surname = scan.next();
         System.out.print("Enter your password:");
         Integer password = scan.nextInt();
 
-        //Dbfunctions.login(conn,"person",name,surename,password);
+        //Dbfunctions.login(conn,"person",name,surname,password);
         boolean isLoginSuccessful = Dbfunctions.login(conn,"person",name,surname,password);
         if (isLoginSuccessful) {
             int cashofperson = db.get_cash_person(conn,"person",name,surname,password);
