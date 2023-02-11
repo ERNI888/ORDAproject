@@ -51,7 +51,7 @@ public class RegisterAndLogin {
                 }
                 else if(priceofhotel<cashofperson){
                     int remains = cashofperson - priceofhotel;
-                    db.update_cash(conn, remianss, cashofperson, name,surname,password);
+                    db.update_cash(conn, remains, cashofperson, name,surname,password);
                     System.out.println("YOU SUCCESSFULLY BOUGHT");
                 }
                 else {
