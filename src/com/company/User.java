@@ -3,13 +3,9 @@ package com.company;
 public class User {
     public static String name;
     public static String surname;
+    public static int password;
     public static int cash;
-//
-//    public User() {
-//        this.name = name;
-//        this.surname = surname;
-//        this.cash = cash;
-//    }
+
 
     public String getName() {
         return name;
@@ -34,4 +30,14 @@ public class User {
     public void setCash(int cash) {
         this.cash = cash;
     }
+
+    public void setPassword(int password) {
+        User.password = password;
+    }
+
+    public int getPassword() {
+        return password;
+    }
 }
+
+
