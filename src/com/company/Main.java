@@ -7,7 +7,7 @@ public class Main extends RegisterAndLogin {
     RegisterAndLogin rg = new RegisterAndLogin();
     static Dbfunctions db = new Dbfunctions();
     static SearchByCountry sbc = new SearchByCountry();
-    Connection conn = db.connect_to_db("postgres", "postgres", "12345678");
+    Connection conn = db.connect_to_db("postgres", "postgres", "123");
 
     public static void main(String[] args) {
 //        db.createTable(conn,"per");
@@ -21,12 +21,18 @@ public class Main extends RegisterAndLogin {
         scan.nextLine();
         switch (number){
             case 1:
-                checkLogin();
+                 if(checkLogin()) {
+                    SearchByCountry.searchByCountry();
+                }
                 break;
             case 2:
                 register();
-                checkLogin();
-                break;
+
+                if(checkLogin()) {
+                    SearchByCountry.searchByCountry();
+
+                }
+                 break;
             default:
                 return;
         }
