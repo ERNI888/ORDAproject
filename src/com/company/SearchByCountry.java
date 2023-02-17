@@ -8,7 +8,7 @@ public class SearchByCountry{
     public static void searchByCountry() {
         Scanner scan = new Scanner(System.in);
         Dbfunctions db = new Dbfunctions();
-        Connection conn = db.connect_to_db("postgres", "postgres", "pinokio");
+        Connection conn = Dbfunctions.connect_to_db("postgres", "postgres", "pinokio");
 
         System.out.println("\nYOU SUCCESSFULLY LOGIN AND WE HAVE SOME OFFERS FOR YOU");
         System.out.println("Countries which you can arrive:");
@@ -21,7 +21,5 @@ public class SearchByCountry{
         String write_name_country = scan.next();
         scan.nextLine();
         db.search_by_country(conn, "tur", write_name_country);
-        }
-
-
+    }
 }
