@@ -7,7 +7,7 @@ public class RegisterAndLogin {
      static Scanner scan = new Scanner(System.in);
      static Dbfunctions db =new Dbfunctions();
      static SearchByCountry sbc = new SearchByCountry();
-     static Connection conn=db.connect_to_db("postgres","postgres","shisuimykty1006");
+     static Connection conn=db.connect_to_db("postgres","postgres","123");
     public static void register(){
         System.out.print("\nREGISTRATION FORM:\n");
         System.out.print("Your Name:");

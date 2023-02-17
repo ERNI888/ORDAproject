@@ -1,6 +1,8 @@
 package com.company;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class SearchByCountry{
@@ -8,7 +10,7 @@ public class SearchByCountry{
     public static void searchByCountry() {
         Scanner scan = new Scanner(System.in);
         Dbfunctions db = new Dbfunctions();
-        Connection conn = db.connect_to_db("postgres", "postgres", "12345678");
+        Connection conn = db.connect_to_db("postgres", "postgres", "123");
 
         System.out.println("\nYOU SUCCESSFULLY LOGIN AND WE HAVE SOME OFFERS FOR YOU");
         System.out.println("Countries which you can arrive:");
@@ -18,10 +20,25 @@ public class SearchByCountry{
         System.out.println("4) UK");
         System.out.println("5) Kazakhstan");
 
-        String write_name_country = scan.next();
+        int number = scan.nextInt();
         scan.nextLine();
-        db.search_by_country(conn, "tur", write_name_country);
+        switch (number) {
+            case 1:
+                db.search_by_country(conn, "tur", "Dubai");
+                break;
+            case 2:
+                db.search_by_country(conn, "tur", "Turkey");
+                break;
+            case 3:
+                db.search_by_country(conn, "tur", "Japan");
+                break;
+            case 4:
+                db.search_by_country(conn, "tur", "UK");
+                break;
+            case 5:
+                db.search_by_country(conn, "tur", "Kazakhstan");
+                break;
         }
 
-
-}
+        }
+    }
