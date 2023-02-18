@@ -1,13 +1,8 @@
 package com.company;
 
-import java.sql.Connection;
 import java.util.Scanner;
 public class Main  {
     static Scanner scan = new Scanner(System.in);
-    RegisterAndLogin rg = new RegisterAndLogin();
-    static Dbfunctions db = new Dbfunctions();
-    static SearchByCountry sbc = new SearchByCountry();
-    Connection conn = db.connect_to_db("postgres", "postgres", "shisuimykty1006");
 
     public static void main(String[] args) {
 //        db.createTable(conn,"per");
@@ -24,9 +19,6 @@ public class Main  {
             case 2 : {
                 RegisterAndLogin.register();
                 RegisterAndLogin.checkLogin();
-            }
-            default : {
-                return;
             }
         }
      }

@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class RegisterAndLogin extends User {
+    static User user = new User();
     static Scanner scan = new Scanner(System.in);
     static Dbfunctions db =new Dbfunctions();
-    static Connection conn= Dbfunctions.connect_to_db("postgres","postgres","pinokio");
+    static Connection conn= Dbfunctions.connect_to_db("postgres","postgres","shisuimykty1006");
     public static void register() {
         System.out.print("\nREGISTRATION FORM:\n");
         System.out.print("Your Name:");
@@ -18,7 +19,6 @@ public class RegisterAndLogin extends User {
         System.out.print("How much money do you have?:");
         int cash = scan.nextInt();
 
-        User user = new User();
         user.setName(name);
         user.setSurname(surname);
         user.setPassword(password);
@@ -27,7 +27,7 @@ public class RegisterAndLogin extends User {
         Dbfunctions.register(conn, "person", user.getName(), user.getSurname(), user.getPassword(), user.getCash());
     }
 
-    public static int processHotelBooking(Connection conn, Scanner scan, String name, String surname, int password, int cashofperson) {
+    public static void processHotelBooking(Connection conn, Scanner scan, String name, String surname, int password, int cashofperson) {
         SearchByCountry.searchByCountry();
 
         System.out.println("WRITE ID OF HOTEL:");
@@ -58,10 +58,10 @@ public class RegisterAndLogin extends User {
                     System.out.println("Okay, see u soon!");
             }
         }
-        return 0;
+
     }
 
-    public static boolean checkLogin() {
+    public static void checkLogin() {
         System.out.print("\nLOGIN FORM:\n");
         System.out.print("Your Name:");
         String name = scan.next();
@@ -80,7 +80,6 @@ public class RegisterAndLogin extends User {
         } else {
             System.out.println("MAYBE YOUR NAME/SURNAME/PASSWORD IS WRONG");
         }
-        return isLoginSuccessful;
     }
 
 }
