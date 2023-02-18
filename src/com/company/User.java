@@ -1,10 +1,10 @@
 package com.company;
 
 public class User {
-    public static String name;
-    public static String surname;
-    public static int password;
-    public static int cash;
+    private static String name;
+    private static String surname;
+    private static int password;
+    private static int cash;
 
 
     public String getName() {
