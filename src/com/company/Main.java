@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+
 public class Main {
     static Login login = new Login();
     static Register register = new Register();
@@ -17,12 +18,14 @@ public class Main {
         switch (number) {
             case 1:
                 login.login();
+                User.user();
                 break;
             case 2:
                 register.register();
                 login.login();
+                User.user();
                 break;
         }
-     }
+    }
 }
 

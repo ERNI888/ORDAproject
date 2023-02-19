@@ -1,11 +1,39 @@
 package com.company;
 
+import java.sql.Connection;
+import java.util.Scanner;
 
-abstract class User {
+import static com.company.Dbfunctions.userInfo;
+
+public class User {
     private static String name;
     private static String surname;
     private static int password;
     private static int cash;
+
+
+    public static void user() {
+        Scanner scan = new Scanner(System.in);
+        Dbfunctions db = new Dbfunctions();
+        Connection conn = Dbfunctions.connectToDb("postgres", "postgres", "123");
+        System.out.println("1)My profile");
+        System.out.println("2)Exit");
+        int confirm = scan.nextInt();
+        if(confirm==1){
+            System.out.println("Enter your password:");
+            String write_password = scan.next();
+            scan.nextLine();
+            userInfo(conn, "person", write_password);
+
+        }
+        if(confirm==2){
+            System.out.println("see u soon!");
+
+        }
+
+    }
+
+
 
 
     public String getName() {
@@ -13,7 +41,7 @@ abstract class User {
     }
 
     public void setName(String name) {
-        User.name = name;
+        this.name = name;
     }
 
     public String getSurname() {
@@ -21,7 +49,7 @@ abstract class User {
     }
 
     public void setSurname(String surname) {
-        User.surname = surname;
+        this.surname = surname;
     }
 
     public int getCash() {
@@ -29,7 +57,7 @@ abstract class User {
     }
 
     public void setCash(int cash) {
-        User.cash = cash;
+        this.cash = cash;
     }
 
     public void setPassword(int password) {
@@ -39,7 +67,6 @@ abstract class User {
     public int getPassword() {
         return password;
     }
-
 }
 
 
