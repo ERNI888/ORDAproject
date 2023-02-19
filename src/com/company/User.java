@@ -1,10 +1,11 @@
 package com.company;
 
-public class User {
-    public static String name;
-    public static String surname;
-    public static int password;
-    public static int cash;
+
+abstract class User {
+    private static String name;
+    private static String surname;
+    private static int password;
+    private static int cash;
 
 
     public String getName() {
@@ -12,7 +13,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        User.name = name;
     }
 
     public String getSurname() {
@@ -20,7 +21,7 @@ public class User {
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        User.surname = surname;
     }
 
     public int getCash() {
@@ -28,7 +29,7 @@ public class User {
     }
 
     public void setCash(int cash) {
-        this.cash = cash;
+        User.cash = cash;
     }
 
     public void setPassword(int password) {
@@ -38,6 +39,7 @@ public class User {
     public int getPassword() {
         return password;
     }
+
 }
 
 
