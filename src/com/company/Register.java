@@ -3,15 +3,15 @@ package com.company;
 import java.sql.Connection;
 import java.util.Scanner;
 
-public class Register extends UserManagement implements DbfunctionStrategy{
+public class Register extends UserManagement {
     Scanner scan = new Scanner(System.in);
     Dbfunctions db =new Dbfunctions();
     SearchByCountry search = new SearchByCountry();
     CashManagement cashM = new CashManagement();
     UserManagement userM  = new UserManagement();
-    Connection conn= db.connectToDb("postgres","postgres","pinokio");
+    Connection conn= db.connectToDb("postgres","postgres","shisuimykty1006");
 
-    @Override
+
     public void register() {
         System.out.print("\nREGISTRATION FORM:\n");
         System.out.print("Your Name:");
@@ -62,4 +62,3 @@ public class Register extends UserManagement implements DbfunctionStrategy{
         }
     }
 }
-
