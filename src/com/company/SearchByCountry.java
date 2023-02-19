@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class SearchByCountry{
-    public void searchByCountry() {
+
+    public static void searchByCountry() {
         Scanner scan = new Scanner(System.in);
         Dbfunctions db = new Dbfunctions();
-        Connection conn = db.connectToDb("postgres", "postgres", "pinokio");
+        Connection conn = Dbfunctions.connectToDb("postgres", "postgres", "123");
 
-        System.out.println("\nYOU SUCCESSFULLY LOGIN AND WE HAVE SOME OFFERS FOR YOU");
         System.out.println("Countries which you can arrive:");
         System.out.println("1) Dubai");
         System.out.println("2) Turkey");
