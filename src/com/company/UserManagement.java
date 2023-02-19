@@ -2,7 +2,7 @@ package com.company;
 
 import java.sql.*;
 
-public class UserManagement extends User {
+public class UserManagement implements InterManagement {
     public void register(Connection conn, String table_name, String name, String surname, int password, Integer cash) {
         Statement statement;
         try {
@@ -67,4 +67,6 @@ public class UserManagement extends User {
             System.err.println("Failed to update cash amount: " + e.getMessage());
         }
     }
+
+
 }
