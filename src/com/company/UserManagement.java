@@ -3,6 +3,7 @@ package com.company;
 import java.sql.*;
 
 public class UserManagement implements InterManagement {
+    @Override
     public void register(Connection conn, String table_name, String name, String surname, int password, Integer cash) {
         Statement statement;
         try {
@@ -15,7 +16,7 @@ public class UserManagement implements InterManagement {
         }
     }
 
-
+@Override
     public boolean login(Connection conn, String table_name, String name, String surname, int password) {
         try {
             String query = String.format("SELECT * FROM %s WHERE name='%s' and surname='%s' and password='%s'", table_name, name, surname, password);
@@ -29,7 +30,7 @@ public class UserManagement implements InterManagement {
         }
         return false;
     }
-
+@Override
     public int getCashAmountForPerson(Connection conn, String table_name, String name, String surname, int password) {
         try {
             String query = "SELECT cash FROM person WHERE name = ? AND surname = ? AND password = ?";
@@ -47,7 +48,7 @@ public class UserManagement implements InterManagement {
         return 0;
     }
 
-
+@Override
     public void updateCash(Connection conn, int newCash, int oldCash, String name, String surname, int password) {
         try {
             String query = "UPDATE person SET cash = ? WHERE name = ? AND surname = ? AND password = ? AND cash = ?";
