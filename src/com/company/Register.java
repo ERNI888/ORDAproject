@@ -9,7 +9,8 @@ public class Register extends UserManagement {
     SearchByCountry search = new SearchByCountry();
     CashManagement cashM = new CashManagement();
     UserManagement userM  = new UserManagement();
-    Connection conn= db.connectToDb("postgres","postgres","shisuimykty1006");
+
+    Connection conn= db.connectToDb("postgres","postgres","123");
 
 
     public void register() {
@@ -41,10 +42,12 @@ public class Register extends UserManagement {
         if (confirm == 1) {
             if (priceofhotel > cashofperson) {
                 System.out.println("YOU HAVE LESS MONEY, SORRY");
+                User.user();
             } else if (priceofhotel < cashofperson) {
                 int remains = cashofperson - priceofhotel;
                 userM.updateCash(conn, remains, cashofperson, name, surname, password);
                 System.out.println("YOU SUCCESSFULLY BOUGHT");
+                User.user();
             } else {
                 System.out.println("ERROR 404");
             }
@@ -60,5 +63,6 @@ public class Register extends UserManagement {
                     break;
             }
         }
+
     }
 }

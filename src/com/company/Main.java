@@ -18,12 +18,10 @@ public class Main {
         switch (number) {
             case 1:
                 login.login();
-                User.user();
                 break;
             case 2:
                 register.register();
                 login.login();
-                User.user();
                 break;
         }
     }
