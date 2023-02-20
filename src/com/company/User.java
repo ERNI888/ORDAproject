@@ -3,8 +3,6 @@ package com.company;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import static com.company.Dbfunctions.userInfo;
-
 public class User {
     private static String name;
     private static String surname;
@@ -12,26 +10,26 @@ public class User {
     private static int cash;
 
 
-    public static void user() {
-        Scanner scan = new Scanner(System.in);
-        Dbfunctions db = new Dbfunctions();
-        Connection conn = Dbfunctions.connectToDb("postgres", "postgres", "123");
-        System.out.println("1)My profile");
-        System.out.println("2)Exit");
-        int confirm = scan.nextInt();
-        if(confirm==1){
-            System.out.println("Enter your password:");
-            String write_password = scan.next();
-            scan.nextLine();
-            userInfo(conn, "person", write_password);
-
-        }
-        if(confirm==2){
-            System.out.println("see u soon!");
-
-        }
-
-    }
+//    public static void user() {
+//        Scanner scan = new Scanner(System.in);
+//        Dbfunctions db = new Dbfunctions();
+//        Connection conn = db.connectToDb("postgres", "postgres", "pinokio");
+//        System.out.println("1)My profile");
+//        System.out.println("2)Exit");
+//        int confirm = scan.nextInt();
+//        if(confirm==1){
+//            System.out.println("Enter your password:");
+//            String write_password = scan.next();
+//            scan.nextLine();
+//            user.Info(conn, "person", write_password);
+//
+//        }
+//        if(confirm==2){
+//            System.out.println("see u soon!");
+//
+//        }
+//
+//    }
 
 
 

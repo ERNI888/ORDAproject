@@ -1,13 +1,14 @@
 package com.company;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 public class Login extends User{
     Scanner scan = new Scanner(System.in);
     Dbfunctions db = new Dbfunctions();
     UserManagement userM = new UserManagement();
     Register register = new Register();
-    Connection conn = db.connectToDb("postgres","postgres","123");
-    public void login() {
+    Connection conn = db.connectToDb("postgres","postgres","pinokio");
+    public void login() throws SQLException {
         System.out.print("\nLOGIN FORM:\n");
         System.out.print("Your Name:");
         String name = scan.next();

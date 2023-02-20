@@ -1,6 +1,7 @@
 package com.company;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Register extends UserManagement {
@@ -9,8 +10,7 @@ public class Register extends UserManagement {
     SearchByCountry search = new SearchByCountry();
     CashManagement cashM = new CashManagement();
     UserManagement userM  = new UserManagement();
-
-    Connection conn= db.connectToDb("postgres","postgres","123");
+    Connection conn= db.connectToDb("postgres","postgres","pinokio");
 
 
     public void register() {
@@ -27,7 +27,7 @@ public class Register extends UserManagement {
         userM.register(conn, "person", name, surname, password, cash);
     }
 
-    public void processHotelBooking(Connection conn, Scanner scan, String name, String surname, int password, int cashofperson) {
+    public void processHotelBooking(Connection conn, Scanner scan, String name, String surname, int password, int cashofperson) throws SQLException {
         search.searchByCountry();
 
         System.out.println("WRITE ID OF HOTEL:");
@@ -42,12 +42,10 @@ public class Register extends UserManagement {
         if (confirm == 1) {
             if (priceofhotel > cashofperson) {
                 System.out.println("YOU HAVE LESS MONEY, SORRY");
-                User.user();
             } else if (priceofhotel < cashofperson) {
                 int remains = cashofperson - priceofhotel;
                 userM.updateCash(conn, remains, cashofperson, name, surname, password);
                 System.out.println("YOU SUCCESSFULLY BOUGHT");
-                User.user();
             } else {
                 System.out.println("ERROR 404");
             }
@@ -63,6 +61,5 @@ public class Register extends UserManagement {
                     break;
             }
         }
-
     }
 }
