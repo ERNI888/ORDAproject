@@ -3,14 +3,14 @@ package com.company;
 import java.sql.Connection;
 import java.util.Scanner;
 
-public class Register extends UserManagement {
+public class Register  {
     Scanner scan = new Scanner(System.in);
     Dbfunctions db =new Dbfunctions();
-    SearchByCountry search = new SearchByCountry();
+   SearchByCountry search = new SearchByCountry();
     CashManagement cashM = new CashManagement();
     UserManagement userM  = new UserManagement();
 
-    Connection conn= db.connectToDb("postgres","postgres","123");
+    Connection conn= db.connectToDb("postgres","postgres","shisuimykty1006");
 
 
     public void register() {
@@ -42,12 +42,12 @@ public class Register extends UserManagement {
         if (confirm == 1) {
             if (priceofhotel > cashofperson) {
                 System.out.println("YOU HAVE LESS MONEY, SORRY");
-                User.user();
+                Profile.profile();
             } else if (priceofhotel < cashofperson) {
                 int remains = cashofperson - priceofhotel;
                 userM.updateCash(conn, remains, cashofperson, name, surname, password);
                 System.out.println("YOU SUCCESSFULLY BOUGHT");
-                User.user();
+                Profile.profile();
             } else {
                 System.out.println("ERROR 404");
             }

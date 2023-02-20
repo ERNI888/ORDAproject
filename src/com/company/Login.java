@@ -6,7 +6,7 @@ public class Login extends User{
     Dbfunctions db = new Dbfunctions();
     UserManagement userM = new UserManagement();
     Register register = new Register();
-    Connection conn = db.connectToDb("postgres","postgres","123");
+    Connection conn = db.connectToDb("postgres","postgres","shisuimykty1006");
     public void login() {
         System.out.print("\nLOGIN FORM:\n");
         System.out.print("Your Name:");
@@ -18,7 +18,6 @@ public class Login extends User{
 
         boolean isLoginSuccessful = userM.login(conn, "person", name, surname, password);
         if (isLoginSuccessful) {
-            System.out.println("\nYOU SUCCESSFULLY LOGIN AND WE HAVE SOME OFFERS FOR YOU");
             int cashofperson = userM.getCashAmountForPerson(conn, "person", name, surname, password);
             System.out.println("YOUR CASH NOW: " + cashofperson);
 
